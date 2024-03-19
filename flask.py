@@ -1,8 +1,28 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import tensorflow as tf
+import numpy as np
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import Session
+from sqlalchemy import create_engine
+from pathlib import Path
+import sqlite3
+
+
+# Database setup
+
+db = Path("Resources/credit_risk.sqlite")
+def get_db_connection(path):
+    conn = sqlite3.connect(path)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
+
+
 
 app = Flask(__name__)
-model = tf.keras.models.load_model('path/to/your/model')
+model = tf.keras.models.load_model('path/to/your/model') # <----------
 
 @app.route('/evaluate-risk', methods=['POST'])
 def evaluate_risk():
