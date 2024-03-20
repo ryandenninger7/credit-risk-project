@@ -45,13 +45,22 @@ def evaluate_risk():
     return jsonify({'isCreditRisk': isCreditRisk})
 
 def preprocess(data):
-    # Placeholder for feature names, replace with actual feature names used in your model
-    numerical_feature_names = ['num_feature1', 'num_feature2']
-    categorical_feature_names = ['cat_feature1', 'cat_feature2']
+    # Updated lists without 'loan_status'
+    numerical_feature_names = ['person_age', 'person_income', 'person_emp_length', 'loan_amnt', 
+                               'loan_percent_income', 'cb_person_cred_hist_length']
+    categorical_feature_names = ['person_home_ownership_MORTGAGE', 'person_home_ownership_OTHER', 
+                                 'person_home_ownership_OWN', 'person_home_ownership_RENT', 
+                                 'loan_intent_DEBTCONSOLIDATION', 'loan_intent_EDUCATION', 
+                                 'loan_intent_HOMEIMPROVEMENT', 'loan_intent_MEDICAL', 
+                                 'loan_intent_PERSONAL', 'loan_intent_VENTURE', 'loan_grade_A', 
+                                 'loan_grade_B', 'loan_grade_C', 'loan_grade_D', 'loan_grade_E', 
+                                 'loan_grade_F', 'loan_grade_G', 'cb_person_default_on_file_N', 
+                                 'cb_person_default_on_file_Y']
     
-    # Extract numerical and categorical features
-    numerical_features = np.array([data[feature] for feature in numerical_feature_names]).reshape(1, -1)
-    categorical_features = np.array([data[feature] for feature in categorical_feature_names]).reshape(1, -1)
+    # Handling missing features by setting a default value or skipping
+    numerical_features = np.array([data.get(feature, 0.0) for feature in numerical_feature_names]).reshape(1, -1)
+    # Ensure categorical features are correctly extracted
+    categorical_features = np.array([data.get(feature, 0) for feature in categorical_feature_names]).reshape(1, -1)
     
     # Apply one-hot encoding to categorical features
     encoded_features = encoder.transform(categorical_features).toarray()
@@ -63,6 +72,7 @@ def preprocess(data):
     processed_data = np.concatenate([scaled_numerical_features, encoded_features], axis=1)
     
     return processed_data
+
 
 
 
