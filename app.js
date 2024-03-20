@@ -1,5 +1,5 @@
  // Get the form element by its ID
-const form = document.getElementById('risk-form');
+const form = document.getElementById('evaluate');
 
 // Add an event listener for form submission
 form.addEventListener('submit', function(event) {
@@ -14,7 +14,7 @@ form.addEventListener('submit', function(event) {
     const loanGrade = parseFloat(document.getElementById('loan_grade').value);
     const loanAmount = parseFloat(document.getElementById('loan_amnt').value);
     const interestRate = parseFloat(document.getElementById('loan_int_rate').value);
-    const loanStatus = parseFloat(document.getElementById('loan_status').value);
+    // const loanStatus = parseFloat(document.getElementById('loan_status').value);
     const percentIncome = parseFloat(document.getElementById('loan_percent_income').value);
     const historicalDefault = parseFloat(document.getElementById('cb_person_default_on_file').value);
     const creditHistoryLength = parseFloat(document.getElementById('cb_person_cred_hist_length').value);
@@ -29,7 +29,7 @@ form.addEventListener('submit', function(event) {
         loan_grade: loanGrade,
         loan_amnt: loanAmount,
         loan_int_rate: interestRate,
-        loan_status: loanStatus,
+        // loan_status: loanStatus,
         loan_percent_income: percentIncome,
         cb_person_default_on_file: historicalDefault,
         cb_person_cred_hist_length: creditHistoryLength
