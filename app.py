@@ -26,10 +26,10 @@ app = Flask(__name__)
 CORS(app)
 
 # Load tensorflow model
-model = tf.keras.models.load_model('Resources/tensorflowmodel.h5')
+model = tf.keras.models.load_model('Resources/tensorflowmodel.keras')
 
-encoder = joblib.load('encoder.joblib')
-scaler = joblib.load('scaler.joblib')
+encoder = joblib.load('Resources/encoder.joblib')
+scaler = joblib.load('Resources/scaler.joblib')
 
 @app.route('/evaluate-risk', methods=['POST'])
 def evaluate_risk():
@@ -43,7 +43,11 @@ def evaluate_risk():
     # Interpret the result
     isCreditRisk = prediction[0] > 0.5 
 
+    # Check data in terminal
+    print(prediction)
+
     return jsonify({'isCreditRisk': isCreditRisk})
+
 
 def preprocess(data):
     # Updated lists without 'loan_status'
