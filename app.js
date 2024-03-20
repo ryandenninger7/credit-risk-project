@@ -23,9 +23,9 @@ form.addEventListener('submit', function(event) {
     const data = {
         person_age: age,
         person_income: income,
-        person_home_ownership: homeOwnership,
+        person_home_ownership: homeOwnership.toUpperCase(),
         person_emp_length: employmentLength,
-        loan_intent: loanIntent,
+        loan_intent: loanIntent.toUpperCase(),
         loan_grade: loanGrade,
         loan_amnt: loanAmount,
         loan_int_rate: interestRate,
@@ -60,7 +60,3 @@ form.addEventListener('submit', function(event) {
 //         console.error('Error:', error);
 //     });
 // });
-
-
-
-  
