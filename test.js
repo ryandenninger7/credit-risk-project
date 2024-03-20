@@ -18,24 +18,42 @@ document.addEventListener('DOMContentLoaded', function() {
       var loanPercentIncome = document.getElementById('loan_percent_income').value;
       var historyOfDefault = document.querySelector('input[name="history_of_default"]:checked').value;
       var creditHistoryLength = document.getElementById('cb_person_cred_hist_length').value;
+
+      //Prepare the data object to send to the Flask backend
+      const data = {
+        person_age: parseInt(age),
+        person_income: parseInt(income),
+        person_home_ownershop: homeOwnership,
+        person_emp_length: parseInt(employmentLength),
+        loan_intent: loanIntent,
+        loan_grade: loanGrade,
+        loan_amnt: parseInt(loanAmount),
+        loan_int_rate: parseFloat(loanInterestRate),
+        loan_percent_income: parseFloat(loanPercentIncome),
+        cb_person_default_on_file: historyOfDefault,
+        cb_person_cred_hist_length: parseInt(creditHistoryLength)
+      }
+
+      
   
-      // Here you can do whatever you want with the form data
-      // For now, let's just log it to the console
-      console.log("Age:", age);
-      console.log("Income:", income);
-      console.log("Home Ownership:", homeOwnership);
-      console.log("Employment Length:", employmentLength);
-      console.log("Loan Intent:", loanIntent);
-      console.log("Loan Grade:", loanGrade);
-      console.log("Loan Amount:", loanAmount);
-      console.log("Loan Interest Rate:", loanInterestRate);
-      console.log("Loan Percent Income:", loanPercentIncome);
-      console.log("History of Default:", historyOfDefault);
-      console.log("Credit History Length:", creditHistoryLength);
+      // Console.log data to make sure everything is correct
+      console.log(data);
+
+      // Send the form data to the Flask backend using AJAX
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/evaluate-risk', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // Response received from the Flask backend
+          console.log(xhr.responseText);
+        }
+      };
+      xhr.send(JSON.stringify(data));
   
       // You can also update the result field in the HTML with the processed data
       var resultField = document.getElementById('result');
-      resultField.value = "Form submitted successfully! Check the console for details.";
+      resultField.value = "Will return results when connected to Flask!";
     });
   });
   
