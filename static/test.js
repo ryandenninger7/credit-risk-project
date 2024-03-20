@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
       event.preventDefault(); // Prevent the default form submission
   
       // Get all form input values
+      var firstName = document.getElementById('first_name').value;
+      var lastName = document.getElementById('last_name').value;
       var age = document.getElementById('person_age').value;
       var income = document.getElementById('person_income').value;
       var homeOwnership = document.getElementById('person_home_ownership').value;
@@ -37,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
   
       // Console.log data to make sure everything is correct
-      console.log(form_data);
+      // console.log(form_data);
 
       // Send the form data to the Flask backend using AJAX
       fetch('/evaluate-risk', {
@@ -57,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
       // You can also update the result field in the HTML with the processed data
       var resultField = document.getElementById('result');
-      resultField.value = "Will return results when connected to Flask!";
+      resultField.value = `${firstName} ${lastName} is / is not considered credit worthy.`;
     });
   });
   
