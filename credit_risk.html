@@ -131,19 +131,19 @@
     </select>
 
     <label for="loan_amount">Loan Amount:</label>
-    <input type="number" id="loan_amnt" name="loan_amount" required>
+    <input type="number" id="loan_amnt" name="loan_amount" step="0.01" required>
 
     <label for="loan_interest_rate">Loan Interest Rate (%):</label>
-    <input type="number" id="loan_int_rate" name="loan_interest_rate" required>
+    <input type="number" id="loan_int_rate" name="loan_interest_rate" step="0.01" required>
 
     <label for="loan_percent_income">Loan Percent Income:</label>
-    <input type="number" id="loan_percent_income" name="loan_percent_income" required>
+    <input type="number" id="loan_percent_income" name="loan_percent_income" step="0.01" required>
 
     <label for="history_of_default">History of Default:</label>
   <div>
-    <input type="radio" id="cb_person_default_on_file_yes" name="history_of_default" value="Yes" required>
+    <input type="radio" id="cb_person_default_on_file_yes" name="history_of_default" value="Y" required>
     <label for="cb_person_default_on_file_yes" class="radio-label">Yes</label>
-    <input type="radio" id="cb_person_default_on_file_no" name="history_of_default" value="No" required>
+    <input type="radio" id="cb_person_default_on_file_no" name="history_of_default" value="N" required>
     <label for="cb_person_default_on_file_no" class="radio-label">No</label>
   </div>
 
@@ -165,4 +165,4 @@
 </body>
 </html>
 
-<script src="app.js"></script>
+<script src="test.js"></script>
