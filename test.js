@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
       var creditHistoryLength = document.getElementById('cb_person_cred_hist_length').value;
 
       //Prepare the data object to send to the Flask backend
-      const data = {
+      const form_data = {
         person_age: parseInt(age),
         person_income: parseInt(income),
         person_home_ownershop: homeOwnership,
@@ -37,19 +37,23 @@ document.addEventListener('DOMContentLoaded', function() {
       
   
       // Console.log data to make sure everything is correct
-      console.log(data);
+      console.log(dform_ata);
 
       // Send the form data to the Flask backend using AJAX
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', '/evaluate-risk', true);
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          // Response received from the Flask backend
-          console.log(xhr.responseText);
-        }
-      };
-      xhr.send(JSON.stringify(data));
+      fetch('/evaluate-risk', {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form_data)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   
       // You can also update the result field in the HTML with the processed data
       var resultField = document.getElementById('result');
