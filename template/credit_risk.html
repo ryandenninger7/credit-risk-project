@@ -85,6 +85,11 @@
     background-color: #00346b;
   }
 
+  .name-container {
+    display: inline-block;
+    width: calc(50% - 5px); /* Adjust width to fit two containers in one line */
+  }
+
 </style>
 </head>
 <body>
@@ -92,6 +97,15 @@
 <div class="container">
   <h1>Loan Application</h1>
   <form action="#" method="post">
+    <div class="name-container">
+      <label for="first_name">First Name</label>
+      <input type="text" id="first_name" name="first_name" required>
+    </div>
+    <div class="name-container">
+      <label for="last_name">Last Name</label>
+      <input type="text" id="last_name" name="last_name" required>
+    </div>
+
     <label for="age">Age:</label>
     <input type="number" id="person_age" name="age" min="16" max="100" required>
 
