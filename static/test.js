@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
   
       // Console.log data to make sure everything is correct
-      console.log(dform_ata);
+      console.log(form_data);
 
       // Send the form data to the Flask backend using AJAX
       fetch('/evaluate-risk', {
