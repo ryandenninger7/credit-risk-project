@@ -14,7 +14,9 @@
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: lightslategray;
+    background-image: url("../static/25368.jpg");
+    background-size:cover;
+    background-position: top;
   }
 
   .container {
@@ -29,19 +31,19 @@
   .container_2 {
     width: 80%;
     margin: 20px auto;
-    background-color: #014092;
+    background-color: #DADDEE;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   }
 
   .container_2 label {
-    color: white;
+    color: #595D7D;
     text-align: center
   }
 
   h1 {
-    color: #004092;
+    color: #292D3E;
     text-align: center;
   }
 
@@ -53,7 +55,7 @@
   label {
     display: block;
     margin-bottom: 5px;
-    color: #004092;
+    color: #3D4259;
   }
 
   select, input[type="number"], input[type="text"] {
@@ -73,7 +75,7 @@
 
   input[type="submit"] {
     width: 100%;
-    background-color: #004092;
+    background-color: #25293B;
     color: #fff;
     padding: 10px;
     border: none;
@@ -82,13 +84,22 @@
   }
 
   input[type="submit"]:hover {
-    background-color: #00346b;
+    background-color: #666986;
   }
 
   .name-container {
     display: inline-block;
     width: calc(50% - 5px); /* Adjust width to fit two containers in one line */
   }
+
+  .disclosure p{
+    color: #fff;
+    margin: 20px;
+    text-align: center;
+    font-size: xx-small;
+  }
+
+
 
 </style>
 </head>
@@ -172,7 +183,10 @@
 <div class="container_2">
   <label for="result">Results:</label>
   <input type="text" id="result" name="result" readonly>
+</div>
 
+<div class="disclosure">
+  <p>Results are expected to be 92% accurate based on the current model. Further considerations should be taken when assessing the credit worthiness of a person.</p>
 </div>
 </div>
 
