@@ -16,7 +16,7 @@ form.addEventListener('submit', function(event) {
     const interestRate = parseFloat(document.getElementById('loan_int_rate').value);
     // const loanStatus = parseFloat(document.getElementById('loan_status').value);
     const percentIncome = parseFloat(document.getElementById('loan_percent_income').value);
-    const historicalDefault = parseFloat(document.getElementById('cb_person_default_on_file').value);
+    const historyOfDefault = document.querySelector('input[name="history_of_default"]:checked').value;;
     const creditHistoryLength = parseFloat(document.getElementById('cb_person_cred_hist_length').value);
 
     // Prepare the data object to send to the Flask backend
@@ -31,35 +31,35 @@ form.addEventListener('submit', function(event) {
         loan_int_rate: interestRate,
         // loan_status: loanStatus,
         loan_percent_income: percentIncome,
-        cb_person_default_on_file: historicalDefault,
+        cb_person_default_on_file: historyOfDefault,
         cb_person_cred_hist_length: creditHistoryLength
     };
 
     // Check that all data is correct
     console.log(data)
 
-    // Send the data to the Flask backend for evaluation
-    fetch('/evaluate-risk', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(result => {
-        // Handle the result returned by the Flask backend
-        const resultDiv = document.getElementById('result');
-        if (result.isCreditRisk) {
-            resultDiv.textContent = 'You are a credit risk.';
-        } else {
-            resultDiv.textContent = 'You are not a credit risk.';
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-});
+//     // Send the data to the Flask backend for evaluation
+//     fetch('/evaluate-risk', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(data)
+//     })
+//     .then(response => response.json())
+//     .then(result => {
+//         // Handle the result returned by the Flask backend
+//         const resultDiv = document.getElementById('result');
+//         if (result.isCreditRisk) {
+//             resultDiv.textContent = 'You are a credit risk.';
+//         } else {
+//             resultDiv.textContent = 'You are not a credit risk.';
+//         }
+//     })
+//     .catch(error => {
+//         console.error('Error:', error);
+//     });
+// });
 
 
 

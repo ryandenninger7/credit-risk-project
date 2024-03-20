@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Loan Application</title>
 <style>
+  .radio-label {
+    display: inline-block;
+    margin-right: 10px; 
+  }
+
   body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -19,6 +24,20 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .container_2 {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #014092;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .container_2 label {
+    color: white;
+    text-align: center
   }
 
   h1 {
@@ -37,7 +56,7 @@
     color: #004092;
   }
 
-  select, input[type="number"], input[type="text"], input[type="radio"] {
+  select, input[type="number"], input[type="text"] {
     width: 100%;
     padding: 10px;
     margin: 5px 0 15px;
@@ -47,8 +66,9 @@
   }
 
   input[type="radio"] {
-    display: inline;
+    display: inline-block;
     margin-right: 10px;
+    vertical-align: middle;
   }
 
   input[type="submit"] {
@@ -120,14 +140,26 @@
     <input type="number" id="loan_percent_income" name="loan_percent_income" required>
 
     <label for="history_of_default">History of Default:</label>
-    <input type="radio" id="cb_person_default_on_file" name="history_of_default" value="Yes" required><label for="history_of_default_yes">Yes</label>
-    <input type="radio" id="cb_person_default_on_file" name="history_of_default" value="No" required><label for="history_of_default_no">No</label>
+  <div>
+    <input type="radio" id="cb_person_default_on_file_yes" name="history_of_default" value="Yes" required>
+    <label for="cb_person_default_on_file_yes" class="radio-label">Yes</label>
+    <input type="radio" id="cb_person_default_on_file_no" name="history_of_default" value="No" required>
+    <label for="cb_person_default_on_file_no" class="radio-label">No</label>
+  </div>
 
     <label for="credit_history_length">Credit History Length:</label>
     <input type="number" id="cb_person_cred_hist_length" name="credit_history_length" required>
 
     <input type="submit" value="Predict Credit Worthiness" id="evaluate">
   </form>
+
+</div>
+
+<div class="container_2">
+  <label for="result">Results:</label>
+  <input type="text" id="result" name="result" readonly>
+
+</div>
 </div>
 
 </body>
