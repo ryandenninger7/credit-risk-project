@@ -7,13 +7,9 @@ from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 from pathlib import Path
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import OneHotEncoder as enc
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
 import joblib
 from joblib import dump, load
-dump(enc, 'credit_risk.joblib') 
 import sqlite3
 
 
@@ -31,8 +27,8 @@ CORS(app)
 # Load tensorflow model
 model = tf.keras.models.load_model('Resources/tensorflowmodel.h5') # <----------
 
-encoder = joblib.load('credit_risk_encoder.joblib')
-scaler = joblib.load('credit_risk_scaler.joblib')
+encoder = joblib.load('encoder.joblib')
+scaler = joblib.load('scaler.joblib')
 
 @app.route('/evaluate-risk', methods=['POST'])
 def evaluate_risk():
@@ -49,16 +45,25 @@ def evaluate_risk():
     return jsonify({'isCreditRisk': isCreditRisk})
 
 def preprocess(data):
-    numerical_features = np.array([])  
-    categorical_features = np.array([])  
-    # Encode
-    encoded_features = encoder.transform(categorical_features.reshape(1, -1))
-    # Scale
+    # Placeholder for feature names, replace with actual feature names used in your model
+    numerical_feature_names = ['num_feature1', 'num_feature2']
+    categorical_feature_names = ['cat_feature1', 'cat_feature2']
+    
+    # Extract numerical and categorical features
+    numerical_features = np.array([data[feature] for feature in numerical_feature_names]).reshape(1, -1)
+    categorical_features = np.array([data[feature] for feature in categorical_feature_names]).reshape(1, -1)
+    
+    # Apply one-hot encoding to categorical features
+    encoded_features = encoder.transform(categorical_features).toarray()
+    
+    # Scale numerical features
     scaled_numerical_features = scaler.transform(numerical_features)
-
+    
+    # Concatenate scaled numerical features and encoded categorical features
     processed_data = np.concatenate([scaled_numerical_features, encoded_features], axis=1)
- 
+    
     return processed_data
+
 
 
 if __name__ == '__main__':
