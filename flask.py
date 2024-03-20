@@ -22,7 +22,7 @@ def get_db_connection(path):
 
 
 app = Flask(__name__)
-model = tf.keras.models.load_model('path/to/your/model') # <----------
+model = tf.keras.models.load_model('Resources/tensorflowmodel.h5') # <----------
 
 @app.route('/evaluate-risk', methods=['POST'])
 def evaluate_risk():
@@ -46,3 +46,33 @@ def preprocess(data):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+# -----------------------------------
+app = Flask(__name__)
+
+# Load the TensorFlow model
+model = load_model('my_model.h5')
+
+@app.route('/evaluate-risk', methods=['POST'])
+def evaluate_risk():
+    data = request.json
+    # Assume 'data' is a dict containing the user inputs
+    
+    # Preprocess the data to match the model's training format
+    # Here you need to apply the same preprocessing as during the training phase
+    # This might include scaling numerical features and encoding categorical features
+    processed_data = preprocessor.transform(pd.DataFrame([data]))
+    
+    # Predict using the TensorFlow model
+    prediction = model.predict(processed_data)
+    
+    # Interpret the prediction result
+    isCreditRisk = prediction[0] > 0.5  # Adjust based on your model's output
+    
+    return jsonify({'isCreditRisk': isCreditRisk})
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
