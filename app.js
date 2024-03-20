@@ -35,6 +35,9 @@ form.addEventListener('submit', function(event) {
         cb_person_cred_hist_length: creditHistoryLength
     };
 
+    // Check that all data is correct
+    console.log(data)
+
     // Send the data to the Flask backend for evaluation
     fetch('/evaluate-risk', {
         method: 'POST',
