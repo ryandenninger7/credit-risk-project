@@ -8,10 +8,10 @@ form.addEventListener('submit', function(event) {
     // Get the input values from the form
     const age = parseFloat(document.getElementById('person_age').value);
     const income = parseFloat(document.getElementById('person_income').value);
-    const homeOwnership = parseFloat(document.getElementById('person_home_ownership').value);
+    const homeOwnership = parse(document.getElementById('person_home_ownership').value);
     const employmentLength = parseFloat(document.getElementById('person_emp_length').value);
-    const loanIntent = parseFloat(document.getElementById('loan_intent').value);
-    const loanGrade = parseFloat(document.getElementById('loan_grade').value);
+    const loanIntent = parse(document.getElementById('loan_intent').value);
+    const loanGrade = parse(document.getElementById('loan_grade').value);
     const loanAmount = parseFloat(document.getElementById('loan_amnt').value);
     const interestRate = parseFloat(document.getElementById('loan_int_rate').value);
     // const loanStatus = parseFloat(document.getElementById('loan_status').value);
