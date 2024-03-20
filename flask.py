@@ -6,17 +6,23 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 from pathlib import Path
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import OneHotEncoder as enc
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+import joblib
+from joblib import dump, load
+dump(enc, 'credit_risk.joblib') 
 import sqlite3
 
 
 # Database setup
-
 db = Path("Resources/credit_risk.sqlite")
 def get_db_connection(path):
     conn = sqlite3.connect(path)
     conn.row_factory = sqlite3.Row
     return conn
-
 
 
 app = Flask(__name__)
@@ -25,6 +31,8 @@ CORS(app)
 # Load tensorflow model
 model = tf.keras.models.load_model('Resources/tensorflowmodel.h5') # <----------
 
+encoder = joblib.load('credit_risk_encoder.joblib')
+scaler = joblib.load('credit_risk_scaler.joblib')
 
 @app.route('/evaluate-risk', methods=['POST'])
 def evaluate_risk():
