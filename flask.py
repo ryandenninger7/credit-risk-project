@@ -25,7 +25,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Load tensorflow model
-model = tf.keras.models.load_model('Resources/tensorflowmodel.h5') # <----------
+model = tf.keras.models.load_model('Resources/tensorflowmodel.h5')
 
 encoder = joblib.load('encoder.joblib')
 scaler = joblib.load('scaler.joblib')
