@@ -70,13 +70,16 @@ document.addEventListener('DOMContentLoaded', function() {
       .then(data => {
         console.log(data);
       })
+      .then(result => {
+        // Ensure we are grabbing the right data
+        console.log(result.Type)
+        // Handle the result returned by Flask backend
+        const resultDiv = document.getElementById('result');
+        resultDiv.textContent = `${firstName} ${lastName} is a ${result.Type}.`
+      })
       .catch(error => {
         console.error('Error:', error);
-      });
-  
-      // You can also update the result field in the HTML with the processed data
-      var resultField = document.getElementById('result');
-      resultField.value = `${firstName} ${lastName} is / is not considered credit worthy.`;
-    });
-  });
-  
+      });  
+
+  })
+});
