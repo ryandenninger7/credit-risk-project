@@ -1,26 +1,21 @@
-// Automatically fill in Loan Percent Income
-var loanAmountInput = document.getElementById('loan_amt');
-var incomeInput = document.getElementById('person_income');
-var loanPercentIncomeInput = document.getElementById('loan_percent_income');
-
-//  Calculate and update loan percent income
-function updateLoanPercentIncome() {
- const loanAmount = parseFloat(loanAmountInput.value);
- const income = parseFloat(incomeInput.value);
- if (!isNaN(loanAmount) && !isNaN(income) && income !== 0) {
-   const loanPercentIncome = loanAmount / income;
-   loanPercentIncomeInput.value = loanPercentIncome.toFixed(2);
- } else {
-   loanPercentIncomeInput.value = ''
- }
+document.addEventListener('DOMContentLoaded', function() {
+  // Function to update loan_percent_income
+  function updateLoanPercentIncome() {
+    var loanAmount = parseFloat(document.getElementById('loan_amnt').value);
+    var income = parseFloat(document.getElementById('person_income').value);
+    var loanPercentIncomeInput = document.getElementById('loan_percent_income');
+    if (!isNaN(loanAmount) && !isNaN(income) && income !== 0) {
+        var loanPercentIncome = loanAmount / income;
+        loanPercentIncomeInput.value = loanPercentIncome.toFixed(2); // Limiting to 2 decimal places
+    } else {
+        loanPercentIncomeInput.value = ''; // Clear the input if values are invalid or income is 0
+    }
 }
 
-// Add event listeners to loan amount & income inputs
-loanAmountInput.addEventListener('input', updateLoanPercentIncome);
-incomeInput.addEventListener('input', updateLoanPercentIncome);
+   // Add event listeners for loan_amount and income inputs
+   document.getElementById('loan_amnt').addEventListener('input', updateLoanPercentIncome);
+   document.getElementById('person_income').addEventListener('input', updateLoanPercentIncome);
 
-
-document.addEventListener('DOMContentLoaded', function() {
   // Get the form element
     var form = document.querySelector('form');
   
