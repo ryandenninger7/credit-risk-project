@@ -1,5 +1,5 @@
 # Import dependencies
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import tensorflow as tf
 import numpy as np
@@ -31,6 +31,11 @@ CORS(app)
 # encoder = joblib.load('Resources/encoder.joblib')
 # scaler = joblib.load('Resources/scaler.joblib')
 
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+
 @app.route('/evaluate-risk', methods=['POST'])
 def evaluate_risk():
     # Check if JSON data is present in the request
@@ -45,6 +50,8 @@ def evaluate_risk():
 
     # Return the received data as the response
     return jsonify(data_received)
+
+
 
 # @app.route('/evaluate-risk', methods=['POST'])
 # def evaluate_risk():
