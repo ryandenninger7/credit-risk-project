@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         person_age: parseInt(age),
         person_income: parseInt(income),
         person_home_ownershop: homeOwnership,
-        person_emp_length: parseInt(employmentLength),
+        person_emp_length: parseFloat(employmentLength),
         loan_intent: loanIntent,
         loan_grade: loanGrade,
         loan_amnt: parseInt(loanAmount),
