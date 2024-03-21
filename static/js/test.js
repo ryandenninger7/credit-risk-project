@@ -69,13 +69,10 @@ document.addEventListener('DOMContentLoaded', function() {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-      })
-      .then(result => {
-        // Ensure we are grabbing the right data
-        console.log(result.Type)
         // Handle the result returned by Flask backend
         const resultDiv = document.getElementById('result');
-        resultDiv.textContent = `${firstName} ${lastName} is a ${result.Type}.`
+        resultDiv.textContent = `${firstName} ${lastName} is a ${data.Type}.`
+
       })
       .catch(error => {
         console.error('Error:', error);
