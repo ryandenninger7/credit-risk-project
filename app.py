@@ -65,9 +65,6 @@ def evaluate_risk():
 #     # Interpret the result
 #     isCreditRisk = prediction[0] > 0.5 
 
-#     # Check data in terminal
-#     print(prediction)
-
 #     return jsonify({'isCreditRisk': isCreditRisk})
 
 
