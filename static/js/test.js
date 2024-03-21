@@ -1,5 +1,27 @@
+// Automatically fill in Loan Percent Income
+var loanAmountInput = document.getElementById('loan_amt');
+var incomeInput = document.getElementById('person_income');
+var loanPercentIncomeInput = document.getElementById('loan_percent_income');
+
+//  Calculate and update loan percent income
+function updateLoanPercentIncome() {
+ const loanAmount = parseFloat(loanAmountInput.value);
+ const income = parseFloat(incomeInput.value);
+ if (!isNaN(loanAmount) && !isNaN(income) && income !== 0) {
+   const loanPercentIncome = loanAmount / income;
+   loanPercentIncomeInput.value = loanPercentIncome.toFixed(2);
+ } else {
+   loanPercentIncomeInput.value = ''
+ }
+}
+
+// Add event listeners to loan amount & income inputs
+loanAmountInput.addEventListener('input', updateLoanPercentIncome);
+incomeInput.addEventListener('input', updateLoanPercentIncome);
+
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Get the form element
+  // Get the form element
     var form = document.querySelector('form');
   
     // Add event listener for form submission
