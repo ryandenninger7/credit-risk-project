@@ -55,26 +55,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
       // Send the form data to the Flask backend using AJAX
-      fetch('/evaluate-risk', {
-        method: 'POST',
-        headers: { 
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(form_data)
-      })
-      .then(response => response.json())
-      .then(data => {
-        // Handle the result returned by Flask backend
-        const prediction = data.Type;
-        console.log(data);
-        return prediction;
-      })
-      .then(prediction => {
-        var resultField = document.getElementById('result');
-        resultField.value = `${firstName} ${lastName} is a ${prediction}.`;
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+fetch('/evaluate-risk', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(form_data)
+})
+  .then(response => response.json())
+  .then(data => {
+    // Handle the result returned by Flask backend
+    const prediction = data.Type;
+
+    // Update the result text and color based on the prediction
+    var resultField = document.getElementById('result');
+    resultField.value = `${firstName} ${lastName} is a ${prediction}.`;
+
+    // Remove existing color classes
+    resultField.classList.remove('low-risk', 'high-risk');
+
+    // Dynamically add color class based on the prediction
+    if (prediction === 'High Credit Risk') {
+      resultField.classList.add('high-risk');
+    } else {
+      resultField.classList.add('low-risk');
+    }
   })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+});
 });
