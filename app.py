@@ -69,7 +69,7 @@ def process_(data):
     df = df.merge(encode_df, left_index=True, right_index=True)
 
     # Drop the categorical colums that are not encoded
-    df = df.drop(df_categ, 1)
+    df = df.drop(df_categ, axis=1)
 
     # Ensure all columns present in the training data are in the new data
     training_categorical_columns = ['person_home_ownership_MORTGAGE', 'person_home_ownership_OTHER', 
