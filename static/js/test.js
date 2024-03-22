@@ -53,10 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
         cb_person_cred_hist_length: parseInt(creditHistoryLength)
       }
 
-      
-  
-      // Console.log data to make sure everything is correct
-      // console.log(form_data);
 
       // Send the form data to the Flask backend using AJAX
       fetch('/evaluate-risk', {
@@ -68,15 +64,17 @@ document.addEventListener('DOMContentLoaded', function() {
       })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         // Handle the result returned by Flask backend
-        const resultDiv = document.getElementById('result');
-        resultDiv.textContent = `${firstName} ${lastName} is a ${data.Type}.`
-
+        const prediction = data.Type;
+        console.log(data);
+        return prediction;
+      })
+      .then(prediction => {
+        var resultField = document.getElementById('result');
+        resultField.value = `${firstName} ${lastName} is a ${prediction}.`;
       })
       .catch(error => {
         console.error('Error:', error);
-      });  
-
+      });
   })
 });
