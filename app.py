@@ -43,9 +43,9 @@ def evaluate_risk():
 
     # Interpret the result
     if prediction[0].tolist()[0] > 0.5:
-        answer = 'High Credit Risk'
+        answer = 'High Credit Risk!'
     else:
-        answer = "Low Credit Risk" 
+        answer = "Low Credit Risk." 
 
     return jsonify({'Type': answer})
 

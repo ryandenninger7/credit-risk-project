@@ -69,13 +69,13 @@ fetch('/evaluate-risk', {
 
     // Update the result text and color based on the prediction
     var resultField = document.getElementById('result');
-    resultField.value = `${firstName} ${lastName} is a ${prediction}.`;
+    resultField.value = `${firstName} ${lastName} is a ${prediction}`;
 
     // Remove existing color classes
     resultField.classList.remove('low-risk', 'high-risk');
 
     // Dynamically add color class based on the prediction
-    if (prediction === 'High Credit Risk') {
+    if (prediction === 'High Credit Risk!') {
       resultField.classList.add('high-risk');
     } else {
       resultField.classList.add('low-risk');
