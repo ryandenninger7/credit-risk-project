@@ -33,7 +33,8 @@ form.addEventListener('submit', function(event) {
         loan_percent_income: percentIncome,
         cb_person_default_on_file: historyOfDefault,
         cb_person_cred_hist_length: creditHistoryLength
-    };
+    }});
+    
 
     // Check that all data is correct
     console.log(data)
