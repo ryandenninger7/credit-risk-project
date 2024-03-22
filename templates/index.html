@@ -26,6 +26,7 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    
   }
 
   .container_2 {
@@ -106,14 +107,35 @@
   .high-risk {
     color: red;
   }
+  .logo {
+    display: inline-block;
+    vertical-align: middle; /* Aligns the image vertically with text */
+    width: 100px; /* Adjust the width of the image as needed */
+    height: auto; /* Maintain aspect ratio */
+}
 
+.heading {
+    display: inline-block; /* Ensures the h1 behaves like an inline-block element */
+    margin: 0; /* Remove any default margin */
+    text-align: center;
+}
+
+hr {
+    margin: 20px 0; /* Add margin to create space above and below the horizontal line */
+    border: none; /* Remove the default border */
+    border-top: 1px solid #666986; /* Add a custom border style */
+    padding: 0 20px; /* Add padding to the left and right of the horizontal line */
+}
 
 </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>Loan Application</h1>
+  <h1>LOAN APPLICATION</h1>
+
+  <hr>
+  
   <form action="#" method="post">
     <div class="name-container">
       <label for="first_name">First Name</label>
