@@ -3,9 +3,8 @@ from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import tensorflow as tf
 import numpy as np
-from sqlalchemy.ext.automap import automap_base
-from sqlalchemy.orm import Session
-from sqlalchemy import create_engine
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import DeclarativeBase
 from pathlib import Path
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
@@ -18,17 +17,44 @@ import pandas as pd
 app = Flask(__name__)
 CORS(app)
 
+# Configure SQLAlchemy to use SQLite database 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///predictions.sqlite'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable modification tracking
+db = SQLAlchemy(app)
+
+# Define SQLAlchemy model class for database table
+class Predictions(db.Model):
+    __tablename__ = 'loanee_predictions'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    inq_date = db.Column(db.String(255))
+    income = db.Column(db.Float)
+    requested_loan_amnt = db.Column(db.Float)
+    loan_intent = db.Column(db.String(255))
+    loan_grade = db.Column(db.String(10))
+    status = db.Column(db.String(255))
+
+# Create db if does not exist
+with app.app_context():
+    db.create_all()
+
 # Load tensorflow model
 model = tf.keras.models.load_model('Resources/tensorflowmodel.keras')
 
 # encoder = joblib.load('Resources/encoder.joblib')
 scaler = joblib.load('Resources/scaler.joblib')
 
+# Home page
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('prediction.html')
 
+# About page
+@app.route("/about")
+def about():
+    return render_template('about.html')
 
+# Use model to make prediction 
 @app.route('/evaluate-risk', methods=['POST'])
 def evaluate_risk():
     data = request.json
@@ -43,9 +69,9 @@ def evaluate_risk():
 
     # Interpret the result
     if prediction[0].tolist()[0] > 0.5:
-        answer = 'High Credit Risk!'
+        answer = 'HIGH CREDIT RISK'
     else:
-        answer = "Low Credit Risk." 
+        answer = "LOW CREDIT RISK" 
 
     return jsonify({'Type': answer})
 
@@ -97,6 +123,64 @@ def process_(data):
 
     # Return processed data
     return X_scaled
+
+# Save results to database
+@app.route('/save_results', methods = ["POST"])
+def save_results():
+    # Get data
+    data = request.json
+
+    # Create variable to store applicant data
+    client_data = Predictions(
+                        name= data['name'], 
+                        inq_date= data['date'],
+                        income= data['income'],
+                        requested_loan_amnt= data['requestLoanAmount'],
+                        loan_intent= data['loanIntent'],
+                        loan_grade= data['loanGrade'],
+                        status= data['status'] 
+                        )
+
+    # Add client data to database
+    db.session.add(client_data)
+    db.session.commit()
+
+    return render_template('prediction.html')
+
+# Page to search database
+@app.route('/search_db')
+def search_db():
+    return render_template('db.html')
+
+# Query database
+@app.route('/search_db/results', methods= ["POST"])
+def search_results():
+    search_term = request.form.get('search_term')
+    if search_term:
+        # Perform the search query
+        rows = Predictions.query.filter(Predictions.name.like(f'%{search_term}%')).all()
+    else:
+        # If no search term is provided, return all rows
+        # rows = Predictions.query.all()
+        pass
+
+    # Convert each row to a dictionary 
+    rows_data = []
+    for row in rows:
+        row_data = {
+            'id': row.id,
+            'name': row.name,
+            'date_inquiry': row.inq_date,
+            'income': row.income,
+            'requested_loan_amount': row.requested_loan_amnt,
+            'loan_intent': row.loan_intent,
+            'loan_grade': row.loan_grade,
+            'status': row.status
+        }
+        rows_data.append(row_data)
+
+    return jsonify(rows=rows_data)
+
 
 
 if __name__ == '__main__':
