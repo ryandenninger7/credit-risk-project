@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Database</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("../static/img/25368_1.jpg");
+    background-size:cover;
+    background-position: top;
+  }
+
+  .container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    
+  }
+
+  .container_2 {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #DADDEE;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .container_2 label {
+    color: #595D7D;
+    text-align: center
+  }
+
+  h1 {
+    color: #292D3E;
+    text-align: left;
+    text-decoration: underline;
+  }
+
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    color: #3D4259;
+  }
+
+  .name-container {
+    display: inline-block;
+    width: calc(50% - 5px); /* Adjust width to fit two containers in one line */
+  }
+
+  .disclosure p{
+    color: #fff;
+    margin: 20px;
+    text-align: center;
+    font-size: xx-small;
+  }
+
+  .logo {
+    display: inline-block;
+    vertical-align: middle; /* Aligns the image vertically with text */
+    width: 100px; /* Adjust the width of the image as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.heading {
+    display: inline-block; /* Ensures the h1 behaves like an inline-block element */
+    margin: 0; /* Remove any default margin */
+    text-align: center;
+}
+
+hr {
+    margin: 20px 0; /* Add margin to create space above and below the horizontal line */
+    border: none; /* Remove the default border */
+    border-top: 1px solid #666986; /* Add a custom border style */
+    padding: 0 20px; 
+}
+
+.header {
+  text-align: right;
+  margin: 30px;
+  font-family: Futura;
+}
+
+.nav-links {
+  display: inline-block; /* Ensure links are displayed inline */
+}
+
+a {
+    color: #25293B; /* Change the color to your desired color */
+    text-decoration: none; /* Remove underline from the link */
+    margin: 0 20px;
+  }
+
+  /* Style for the link when hovered over */
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .logo {
+  height: auto;
+  width: 70px;
+  margin-top: 10px;
+  margin-right: 280px;
+  vertical-align: bottom; /* Align the logo vertically with the header links */
+}
+
+
+.contact-info p {
+    display: inline;
+}
+
+.container_2 {
+  text-align: center; /* Align the text center */
+}
+
+.container_2 p {
+  
+  margin: 20px auto; /* Auto margins for centering */
+  font-size: small;
+  
+}
+
+
+table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        .search-container input[type=text] {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .search-container input[type=submit] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+  
+  .search-container button {
+            background-color: #25293B;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+    }     
+
+  .search-container button:hover {
+            background-color: #666986;
+    }     
+
+</style>
+</head>
+<body>
+  <div class="header">
+    <img src="../static/img/jnrlogo.png" class="logo">
+    <div class="nav-links">
+      <a href="/">Make Prediction</a>
+      <a href="/search_db">Search Database</a>
+      <a href="/about">About</a>
+    </div>
+  </div>
+
+
+<div class="container">
+  <h1>Search Database</h1>
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search by name...">
+      <button id="searchButton">Search</button>
+    </div>
+
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Date Inquiry</th>
+                <th>Income</th>
+                <th>Requested Loan Amount</th>
+                <th>Loan Intent</th>
+                <th>Loan Grade</th>
+                <th>Status</th>
+                <!-- Add more column headers as needed -->
+            </tr>
+        </thead>
+        <tbody>
+          <!-- Table rows will be added dynamically here -->
+        </tbody>
+    </table>
+
+</div>
+
+<div class="container_2">
+    <div class="contact-info">
+        <p>Email: <a href="mailto:default@jnrloans.com">default@jnrloans.com</a></p>
+        <p>Phone: <a href="tel:612-600-0909">612-600-0909</a></p>
+        <p>Address: 3110 E Lake St, Minneapolis, MN 55406</p>
+    </div>
+</div>
+
+<div class="disclosure">
+  <p>JNR Loans is not an actual loan company. This website is only for educational purposes.</p>
+</div>
+</div>
+
+</body>
+</html>
+
+<script src="../static/js/search_db.js"></script>
